@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="main.js" defer></script>
-</head>
-<body>
-    Project-library
+  </head>
+  <body>
+    <header>
+      <h1>Library</h1>
+    </header>
 
-    <div class="toggle-button-cover">
-        <div class="button-cover">
-          <div class="button r" id="button-1">
-            <input type="checkbox" class="checkbox" />
-            <div class="knobs"></div>
-            <div class="layer"></div>
-          </div>
+    <button type="button" class="add-new-book">Add Book</button>
+
+    <div class="display-library">
+      <div class="card book-entry" data-index="0">
+        <div class="book-title">
+          <h2>Gifted Hands</h2>
+        </div>
+        <div class="book-author">
+          <p>Dr. Ben Carson</p>
+        </div>
+        <div class="book-page-numbers">
+          <p>Pages: 256</p>
+        </div>
+        <div class="read-not-read">
+          <label for="read">Read:</label>
+          <input type="checkbox" id="read" name="read" class="read-not-read-checkbox" />
         </div>
       </div>
-</body>
+    </div>
+  </body>
 </html>
