@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+dialog {
+    position: absolute;
+    margin: auto;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+dialog form {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 10px;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row label {
+    width: 40px;
+}
+
+.row input {
+    padding-left: 3px;
+    width: 200px;
+    flex: 1;
+    height: 25px;
+}
+
+.row input[type="checkbox"] {
+    margin-right: auto;
+}
