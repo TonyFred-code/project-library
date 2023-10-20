@@ -31,20 +31,9 @@
             <label for="read">Read</label>
             <input type="checkbox" name="read" id="read" checked required>
         </div>
-        <p>
-          <label for="favAnimal"
-            >Favorite animal:
-            <select name="favAnimal">
-              <option value="default">Choose…</option>
-              <option>Brine shrimp</option>
-              <option>Red panda</option>
-              <option>Spider monkey</option>
-            </select>
-          </label>
-        </p>
         <div>
-          <button value="cancel" formmethod="dialog">Cancel</button>
-          <button id="confirmBtn" value="default">Submit</button>
+          <button value="cancel" id="closeBtn" formmethod="dialog">Cancel</button>
+          <button id="confirmBtn" value="default" formmethod="dialog">Submit</button>
         </div>
       </form>
     </dialog>
