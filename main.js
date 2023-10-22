@@ -121,14 +121,11 @@ function displayBooksInLibrary(library) {
   // else create cards for each entry
   let len = library.length;
 
-  // libraryDisplay.textContent = "";
-
-  console.time("Book Entries");
   for (let i = 0; i < len; i++) {
     if (library[i].displayed) {
-      console.log("displayed");
-    } else {
-      console.time(`Book Entry ${i}`);
+      continue;
+    }
+
       const bookEntry = document.createElement("div");
       bookEntry.setAttribute("class", "book-entry");
       bookEntry.setAttribute("data-index", `${i}`);
@@ -167,11 +164,7 @@ function displayBooksInLibrary(library) {
       bookEntry.appendChild(removeBtn);
       libraryDisplay.appendChild(bookEntry);
       library[i].displayed = true;
-
-      console.timeEnd(`Book Entry ${i}`);
-    }
   }
-  console.timeEnd("Book Entries");
 }
 
 function toggleBookEntryReadStatus() {
