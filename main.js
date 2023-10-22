@@ -3,6 +3,7 @@ const favDialog = document.getElementById("favDialog");
 const confirmBtn = favDialog.querySelector("#confirmBtn");
 const closeDialogBtn = favDialog.querySelector("#closeBtn");
 const form = document.querySelector("form");
+const libraryDisplay = document.querySelector(".library-display");
 
 // "Show the dialog" button opens the <dialog> modally
 showButton.addEventListener("click", () => {
@@ -16,64 +17,22 @@ closeDialogBtn.addEventListener("click", (e) => {
   favDialog.close();
 });
 
-// "Confirm" button triggers "close" on dialog because of [method="dialog"]
 favDialog.addEventListener("close", (e) => {
   console.log("closed");
 });
+
 confirmBtn.addEventListener("click", (event) => {
   event.preventDefault();
 
-  // validateForm();
-  let formValid = validateForm();
-  if (form.title.value.trim() === "") {
-    console.log("not valid");
-    form.title.validity.valid = false;
-    form.title.focus();
-  }
-
-  if (formValid) {
-    console.log(form.title.value);
-    console.log(form.author.value);
-    console.log(form.read.checked);
-    console.log(form.pages.value);
-    addBookToLibrary(
-      form.title.value,
-      form.author.value,
-      form.pages.value,
-      form.read.checked
-    );
-    favDialog.close();
-  } else {
-    displayInvalidMessages();
-  }
+  addBookToLibrary(
+    form.title.value,
+    form.author.value,
+    form.pages.value,
+    form.read.checked
+  );
 });
 
-function validateForm() {
-  const title = form.title.value;
-  const author = form.author.value;
-  const pageNo = form.pages.value;
-  // const readStatus = form.read.checked;
-
-  if (title.trim() === "") {
-    return false;
-  }
-
-  if (author.trim() === "") {
-    console.log("invalid");
-    return false;
-  }
-
-  if (Number(pageNo) <= 0 || Number(pageNo).isNaN) {
-    console.log("invalid");
-    return false;
-  }
-
-  return true;
-}
-
-function displayInvalidMessages() {
-  console.log('displaying error messages')
-}
+function displayInvalidMessages() {}
 
 // Library Storage ?
 const library = [];
@@ -81,26 +40,99 @@ const library = [];
 // Book constructor
 
 function Book(title, author, pageNo, read) {
-  const toggleRead = function () {
-    this.read = !this.read;
-  };
-
-  return {
-    title,
-    author,
-    pageNo,
-    read,
-    toggleRead,
-  };
+  this.title = title;
+  this.author = author;
+  this.pageNo = pageNo;
+  this.read = read;
 }
+
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
+};
 
 function addBookToLibrary(bookTitle, bookAuthor, pageNo, read) {
   const newBook = new Book(bookTitle, bookAuthor, pageNo, read);
 
   library.push(newBook);
-  console.log(library);
 }
 
-function createBookEntryCard() {}
+function displayBooksInLibrary(library) {
+  if (library.length === 0) {
+    libraryDisplay.textContent = "";
+    return;
+  }
 
-function displayBookEntries() {}
+  // else create cards for each entry
+  let len = library.length;
+
+  libraryDisplay.textContent = "";
+
+  for (let i = 0; i < len; i++) {
+    const bookEntry = document.createElement("div");
+    bookEntry.setAttribute("class", "book-entry");
+    bookEntry.setAttribute("data-index", `${i}`);
+
+    const bookTitle = document.createElement("h2");
+    bookTitle.setAttribute("class", "book-title");
+    bookTitle.textContent = `${library[i].title}`;
+
+    const bookAuthor = document.createElement("p");
+    bookAuthor.setAttribute("class", "book-author");
+    bookAuthor.textContent = `${library[i].author}`;
+
+    const bookPageNumber = document.createElement("p");
+    bookPageNumber.setAttribute("class", "book-page-numbers");
+    bookPageNumber.textContent = `${library[i].pageNo} ${
+      library[i].pageNo === 1 ? "page" : "pages"
+    }`;
+
+    const readBtn = document.createElement("button");
+    readBtn.setAttribute("class", "read");
+    readBtn.setAttribute("data-state", `${library[i].read}`);
+    readBtn.setAttribute("type", "button");
+    readBtn.textContent = `${library[i].read ? "READ" : "NOT READ"}`;
+    readBtn.addEventListener("click", toggleBookEntryReadStatus);
+
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("remove-book-entry");
+    removeBtn.setAttribute("data-index", `${i}`);
+    removeBtn.textContent = "REMOVE";
+    removeBtn.addEventListener("click", removeBookEntry);
+
+    bookEntry.appendChild(bookTitle);
+    bookEntry.appendChild(bookAuthor);
+    bookEntry.appendChild(bookPageNumber);
+    bookEntry.appendChild(readBtn);
+    bookEntry.appendChild(removeBtn);
+    libraryDisplay.appendChild(bookEntry);
+    console.log(
+      bookAuthor,
+      bookEntry,
+      bookPageNumber,
+      bookTitle,
+      removeBtn,
+      readBtn
+    );
+  }
+}
+
+function toggleBookEntryReadStatus() {
+  let element = this;
+  let parentEntryIndex = this.parentElement.getAttribute("data-index");
+
+  library[parentEntryIndex].toggleRead();
+  element.textContent = `${
+    library[parentEntryIndex].read ? "READ" : "NOT READ"
+  }`;
+  element.setAttribute("data-state", `${library[parentEntryIndex].read}`);
+}
+
+function removeBookEntry() {
+  let parentIndex = this.getAttribute("data-index");
+
+  library.splice(parentIndex, 1);
+  libraryDisplay.removeChild(this.parentElement);
+  displayBooksInLibrary(library);
+}
+
+displayBooksInLibrary(library);
