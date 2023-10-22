@@ -178,7 +178,6 @@ function removeBookEntry() {
 displayBooksInLibrary(library);
 
 function displayDummyBooks() {
-  const library = [];
   let entriesNo = getRndInt(7, 12);
 
   for (let i = 0; i < entriesNo; i++) {
