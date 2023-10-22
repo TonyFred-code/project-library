@@ -17,8 +17,16 @@ html, body {
     width: 100%;
 }
 
-.icon-container {
+button {
     display: inline-block;
+    outline: none;
+    font-family: inherit;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 30px;
     height: 30px;
     margin: 6px;
@@ -36,6 +44,7 @@ html, body {
     display: grid;
     grid-template-rows: max-content 1fr;
     grid-template-columns: 1fr;
+    gap: 6px;
 }
 
 header {
@@ -49,6 +58,36 @@ header {
 header h1 {
     display: flex;
     align-items: center;
+}
+
+.show-book-entry-form-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 12px 0px;
+}
+
+.icon-container.plus {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.show-book-entry-form {
+    display: flex;
+    align-items: center;
+    text-transform: lowercase;
+    font-weight: bolder;
+    padding: 8px 12px;
+    gap: 8px;
+    border: none;
+    font-size: 1.8rem;
+    border-radius: 8px;
+}
+
+.show-book-entry-form:active {
+    background-color: #D7D7D7;
 }
 
 dialog {
