@@ -13,16 +13,26 @@ showButton.addEventListener("click", () => {
 closeDialogBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
-  console.log("closed without saving");
   favDialog.close();
-});
-
-favDialog.addEventListener("close", (e) => {
-  console.log("closed");
 });
 
 confirmBtn.addEventListener("click", (event) => {
   event.preventDefault();
+
+  if (form.title.value.trim() === "") {
+    form.title.focus();
+    return;
+  }
+
+  if (form.author.value.trim() === "") {
+    form.author.focus();
+    return;
+  }
+
+  if (isNaN(Number(form.pages.value)) || Number(form.pages.value) <= 0) {
+    form.pages.focus();
+    return;
+  }
 
   addBookToLibrary(
     form.title.value,
@@ -30,6 +40,12 @@ confirmBtn.addEventListener("click", (event) => {
     form.pages.value,
     form.read.checked
   );
+
+  form.title.value = "";
+  form.pages.value = "";
+  form.author.value = "";
+  displayBooksInLibrary(library);
+  favDialog.close();
 });
 
 function displayInvalidMessages() {}
@@ -105,14 +121,6 @@ function displayBooksInLibrary(library) {
     bookEntry.appendChild(readBtn);
     bookEntry.appendChild(removeBtn);
     libraryDisplay.appendChild(bookEntry);
-    console.log(
-      bookAuthor,
-      bookEntry,
-      bookPageNumber,
-      bookTitle,
-      removeBtn,
-      readBtn
-    );
   }
 }
 

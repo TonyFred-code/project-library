@@ -21,7 +21,7 @@
       <!-- A modal dialog containing a form -->
       <dialog id="favDialog">
         <form class="book-entry-form">
-        <h2 class=" row form-header">Add New Book</h2>
+          <h2 class="row form-header">Add New Book</h2>
           <div class="row">
             <!-- <label for="title">Title</label> -->
             <input
@@ -57,16 +57,26 @@
             <input type="checkbox" name="read" id="read" checked required />
           </div>
           <div class="row btn-container">
-            <button value="cancel" id="closeBtn" formmethod="dialog" class="cancel-form-entry">
+            <button
+              type="button"
+              value="cancel"
+              id="closeBtn"
+              class="cancel-form-entry"
+            >
               Cancel
             </button>
-            <button id="confirmBtn" value="default" type="submit" class="submit-form-entry">
+            <button
+            formmethod="dialog"
+              id="confirmBtn"
+              value="default"
+              type="submit"
+              class="submit-form-entry"
+            >
               Submit
             </button>
           </div>
         </form>
       </dialog>
-
 
       <div class="show-book-entry-form-btn-container">
         <button id="showDialog" class="show-book-entry-form">
@@ -77,151 +87,7 @@
         </button>
       </div>
 
-      <div class="library-display">
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-
-        <div class="book-entry" data-index="0">
-          <h2 class="book-title">Gifted Hands</h2>
-
-          <p class="book-author">Dr. Ben Carson</p>
-
-          <p class="book-page-numbers">256 pages</p>
-            <button type="button" class="read" data-state="true">READ</button>
-            <button type="button" class="remove-book-entry" data-index="0">
-              REMOVE
-            </button>
-        </div>
-      </div>
+      <div class="library-display"></div>
     </div>
   </body>
 </html>
