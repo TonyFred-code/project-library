@@ -113,11 +113,6 @@ dialog form {
   align-self: center;
 }
 
-/* .row {
-    display: flex;
-    flex-direction: column;
-} */
-
 .row input {
   padding: 8px 6px;
   font-weight: bold;
@@ -204,12 +199,6 @@ form .btn-container {
 
 .book-entry > * {
   width: 100%;
-}
-
-.book-title {
-}
-
-.book-author {
 }
 
 .book-page-numbers {
