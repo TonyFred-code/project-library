@@ -32,7 +32,6 @@ confirmBtn.addEventListener("click", (event) => {
   authorErrContainer.classList.add("hidden");
   pagesNoErrContainer.classList.add("hidden");
 
-
   if (form.title.value.trim() === "") {
     let errMsg = " * Please input book's title * ";
     displayInvalidMessages(errMsg, titleErrContainer);
@@ -113,7 +112,7 @@ function displayBooksInLibrary(library) {
 
   console.time("Book Entries");
   for (let i = 0; i < len; i++) {
-    console.time(`Book Entry ${i}`)
+    console.time(`Book Entry ${i}`);
     const bookEntry = document.createElement("div");
     bookEntry.setAttribute("class", "book-entry");
     bookEntry.setAttribute("data-index", `${i}`);
@@ -152,9 +151,9 @@ function displayBooksInLibrary(library) {
     bookEntry.appendChild(removeBtn);
     libraryDisplay.appendChild(bookEntry);
 
-    console.timeEnd(`Book Entry ${i}`)
+    console.timeEnd(`Book Entry ${i}`);
   }
-  console.timeEnd("Book Entries")
+  console.timeEnd("Book Entries");
 }
 
 function toggleBookEntryReadStatus() {
@@ -186,7 +185,7 @@ function displayDummyBooks() {
     let title = `Book Title ${i + 1}`;
     let author = `Author of Book ${i + 1}`;
     let pagesNo = getRndInt(200, 1000);
-    let checked = (pagesNo % 2 === 0);
+    let checked = pagesNo % 2 === 0;
     let book = new Book(title, author, pagesNo, checked);
     library.push(book);
   }
