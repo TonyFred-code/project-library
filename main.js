@@ -7,6 +7,9 @@ const libraryDisplay = document.querySelector(".library-display");
 const titleErrContainer = document.querySelector(".book-title.error-msg");
 const authorErrContainer = document.querySelector(".book-author.error-msg");
 const pagesNoErrContainer = document.querySelector(".book-pages.error-msg");
+const addDummyBookEntriesBtn = document.querySelector(".add-dummy-book-entries");
+
+addDummyBookEntriesBtn.addEventListener("click", displayDummyBooks);
 
 // "Show the dialog" button opens the <dialog> modally
 showButton.addEventListener("click", () => {
