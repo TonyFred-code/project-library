@@ -181,9 +181,16 @@ function removeBookEntry() {
 displayBooksInLibrary(library);
 
 function displayDummyBooks() {
-  let entriesNo = getRndInt(7, 12);
+  let libraryLen = library.length;
+  let entriesNo = 0;
 
-  for (let i = 0; i < entriesNo; i++) {
+  if (library.length === 0) {
+    entriesNo = getRndInt(7, 12);
+  } else {
+    entriesNo = libraryLen + 1;
+  }
+
+  for (let i = libraryLen; i < entriesNo; i++) {
     let title = `Book Title ${i + 1}`;
     let author = `Author of Book ${i + 1}`;
     let pagesNo = getRndInt(200, 1000);
