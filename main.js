@@ -1,35 +1,55 @@
 const showButton = document.getElementById("showDialog");
-const favDialog = document.getElementById("favDialog");
-const confirmBtn = favDialog.querySelector("#confirmBtn");
-const closeDialogBtn = favDialog.querySelector("#closeBtn");
+const bookEntryDialog = document.getElementById("book-entry-dialog");
+const confirmBtn = bookEntryDialog.querySelector("#confirmBtn");
+const closeDialogBtn = bookEntryDialog.querySelector("#closeBtn");
 const form = document.querySelector("form");
 const libraryDisplay = document.querySelector(".library-display");
+const titleErrContainer = document.querySelector(".book-title.error-msg");
+const authorErrContainer = document.querySelector(".book-author.error-msg");
+const pagesNoErrContainer = document.querySelector(".book-pages.error-msg");
 
 // "Show the dialog" button opens the <dialog> modally
 showButton.addEventListener("click", () => {
-  favDialog.showModal();
+  bookEntryDialog.showModal();
 });
 
 closeDialogBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
-  favDialog.close();
+  bookEntryDialog.close();
+});
+
+bookEntryDialog.addEventListener("close", (e) => {
+  form.title.value = "";
+  form.pages.value = "";
+  form.author.value = "";
 });
 
 confirmBtn.addEventListener("click", (event) => {
   event.preventDefault();
 
+  titleErrContainer.classList.add("hidden");
+  authorErrContainer.classList.add("hidden");
+  pagesNoErrContainer.classList.add("hidden");
+
+
   if (form.title.value.trim() === "") {
+    let errMsg = " * Please input book's title * ";
+    displayInvalidMessages(errMsg, titleErrContainer);
     form.title.focus();
     return;
   }
 
   if (form.author.value.trim() === "") {
+    let errMsg = ` * Please input the book's author * `;
+    displayInvalidMessages(errMsg, authorErrContainer);
     form.author.focus();
     return;
   }
 
   if (isNaN(Number(form.pages.value)) || Number(form.pages.value) <= 0) {
+    let errMsg = " * Please input a valid number greater than zero * ";
+    displayInvalidMessages(errMsg, pagesNoErrContainer);
     form.pages.focus();
     return;
   }
@@ -41,14 +61,22 @@ confirmBtn.addEventListener("click", (event) => {
     form.read.checked
   );
 
-  form.title.value = "";
-  form.pages.value = "";
-  form.author.value = "";
   displayBooksInLibrary(library);
-  favDialog.close();
+  bookEntryDialog.close();
 });
 
-function displayInvalidMessages() {}
+function displayInvalidMessages(errMsg, errDisplayElm) {
+  if (typeof errMsg !== "string" || errMsg.trim() === "") {
+    return;
+  }
+
+  if (errDisplayElm === null || !errDisplayElm) {
+    return;
+  }
+
+  errDisplayElm.textContent = errMsg;
+  errDisplayElm.classList.remove("hidden");
+}
 
 // Library Storage ?
 const library = [];
@@ -83,7 +111,9 @@ function displayBooksInLibrary(library) {
 
   libraryDisplay.textContent = "";
 
+  console.time("Book Entries");
   for (let i = 0; i < len; i++) {
+    console.time(`Book Entry ${i}`)
     const bookEntry = document.createElement("div");
     bookEntry.setAttribute("class", "book-entry");
     bookEntry.setAttribute("data-index", `${i}`);
@@ -121,7 +151,10 @@ function displayBooksInLibrary(library) {
     bookEntry.appendChild(readBtn);
     bookEntry.appendChild(removeBtn);
     libraryDisplay.appendChild(bookEntry);
+
+    console.timeEnd(`Book Entry ${i}`)
   }
+  console.timeEnd("Book Entries")
 }
 
 function toggleBookEntryReadStatus() {
@@ -144,3 +177,26 @@ function removeBookEntry() {
 }
 
 displayBooksInLibrary(library);
+
+function displayDummyBooks() {
+  const library = [];
+  let entriesNo = getRndInt(7, 12);
+
+  for (let i = 0; i < entriesNo; i++) {
+    let title = `Book Title ${i + 1}`;
+    let author = `Author of Book ${i + 1}`;
+    let pagesNo = getRndInt(200, 1000);
+    let checked = (pagesNo % 2 === 0);
+    let book = new Book(title, author, pagesNo, checked);
+    library.push(book);
+  }
+
+  displayBooksInLibrary(library);
+}
+
+function getRndInt(min, max) {
+  // The maximum is inclusive and the minimum is inclusive
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}

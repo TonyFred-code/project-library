@@ -18,12 +18,11 @@
         </h1>
       </header>
 
-      <!-- A modal dialog containing a form -->
-      <dialog id="favDialog">
+      <dialog id="book-entry-dialog">
         <form class="book-entry-form">
           <h2 class="row form-header">Add New Book</h2>
           <div class="row">
-            <!-- <label for="title">Title</label> -->
+            <p class="book-title error-msg hidden"> * Please input a book title</p>
             <input
               type="text"
               name="title"
@@ -33,7 +32,7 @@
             />
           </div>
           <div class="row">
-            <!-- <label for="author">Author</label> -->
+            <p class="book-author error-msg hidden"> * Please input a book author</p>
             <input
               type="text"
               name="author"
@@ -43,7 +42,7 @@
             />
           </div>
           <div class="row">
-            <!-- <label for="pages">Pages</label> -->
+            <p class="book-pages error-msg hidden"> * Please input valid number of pages</p>
             <input
               type="tel"
               required
