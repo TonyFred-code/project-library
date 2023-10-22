@@ -8,54 +8,87 @@
     <script src="main.js" defer></script>
   </head>
   <body>
-    <header>
-      <h1>Library</h1>
-    </header>
+    <div class="container">
+      <header>
+        <h1>
+          <span class="icon-container book-shelf"
+            ><img src="./icons/bookshelf.svg" alt="Book Shelf"
+          /></span>
+          library
+        </h1>
+      </header>
 
-    <!-- A modal dialog containing a form -->
-    <dialog id="favDialog">
-      <form>
-        <div class="row">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" required placeholder="Book Title">
-        </div>
-        <div class="row">
-            <label for="author">Author</label>
-            <input type="text" name="author" id="author" required placeholder="Book Author">
-        </div>
-        <div class="row">
-            <label for="pages">Pages</label>
-            <input type="tel" required name="pages" id="pages" placeholder="256">
-        </div>
-        <div class="row">
-            <label for="read">Read</label>
-            <input type="checkbox" name="read" id="read" checked required>
-        </div>
-        <div>
-          <button value="cancel" id="closeBtn" formmethod="dialog">Cancel</button>
-          <button id="confirmBtn" value="default" formmethod="dialog">Submit</button>
-        </div>
-      </form>
-    </dialog>
-    <p>
-      <button id="showDialog">Show the dialog</button>
-    </p>
-    <output></output>
+      <!-- A modal dialog containing a form -->
+      <dialog id="favDialog">
+        <form class="book-entry-form">
+          <div class="row">
+            <!-- <label for="title">Title</label> -->
+            <input
+              type="text"
+              name="title"
+              id="title"
+              required
+              placeholder="Book Title"
+            />
+          </div>
+          <div class="row">
+            <!-- <label for="author">Author</label> -->
+            <input
+              type="text"
+              name="author"
+              id="author"
+              required
+              placeholder="Book Author"
+            />
+          </div>
+          <div class="row">
+            <!-- <label for="pages">Pages</label> -->
+            <input
+              type="tel"
+              required
+              name="pages"
+              id="pages"
+              placeholder="No. of Pages"
+            />
+          </div>
+          <div class="row read-container">
+            <label for="read">Have you read it?</label>
+            <input type="checkbox" name="read" id="read" checked required />
+          </div>
+          <div>
+            <button value="cancel" id="closeBtn" formmethod="dialog">
+              Cancel
+            </button>
+            <button id="confirmBtn" value="default" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+      </dialog>
 
-    <!-- <button type="button" class="add-new-book">Add Book</button> -->
 
-    <div class="library-display">
-      <div class="card book-entry" data-index="0">
-        <h2 class="book-title">Gifted Hands</h2>
+      <div class="add-book-btn-container">
+        <button id="showDialog" class="show-book-entry-form">
+          <!-- <span class="icon-container plus"> -->
+            <img src="./icons/plus.svg" />
+          <!-- </span> -->
+          Add Book
+        </button>
+      </div>
 
-        <p class="book-author">Dr. Ben Carson</p>
+      <div class="library-display">
+        <div class="card book-entry" data-index="0">
+          <h2 class="book-title">Gifted Hands</h2>
 
-        <p class="book-page-numbers">256 pages</p>
-        <div>
-          <button type="button" class="read" data-state="true">READ</button>
-          <button type="button" class="remove-book" data-index="0">
-            REMOVE
-          </button>
+          <p class="book-author">Dr. Ben Carson</p>
+
+          <p class="book-page-numbers">256 pages</p>
+          <div>
+            <button type="button" class="read" data-state="true">READ</button>
+            <button type="button" class="remove-book" data-index="0">
+              REMOVE
+            </button>
+          </div>
         </div>
       </div>
     </div>

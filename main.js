@@ -23,24 +23,56 @@ favDialog.addEventListener("close", (e) => {
 confirmBtn.addEventListener("click", (event) => {
   event.preventDefault();
 
-  validateForm();
-
-  if (form.title.value && form.author.value && Number(form.pages.value) > 0) {
-    console.log(form.title.value);
-    console.log(form.author.value);
-    console.log(form.read.checked);
-    console.log(form.pages.value);
-    addBookToLibrary(form.title.value, form.author.value, form.pages.value, form.read.checked)
-    favDialog.close();
-  }
-});
-
-function validateForm() {
+  // validateForm();
+  let formValid = validateForm();
   if (form.title.value.trim() === "") {
     console.log("not valid");
     form.title.validity.valid = false;
     form.title.focus();
   }
+
+  if (formValid) {
+    console.log(form.title.value);
+    console.log(form.author.value);
+    console.log(form.read.checked);
+    console.log(form.pages.value);
+    addBookToLibrary(
+      form.title.value,
+      form.author.value,
+      form.pages.value,
+      form.read.checked
+    );
+    favDialog.close();
+  } else {
+    displayInvalidMessages();
+  }
+});
+
+function validateForm() {
+  const title = form.title.value;
+  const author = form.author.value;
+  const pageNo = form.pages.value;
+  // const readStatus = form.read.checked;
+
+  if (title.trim() === "") {
+    return false;
+  }
+
+  if (author.trim() === "") {
+    console.log("invalid");
+    return false;
+  }
+
+  if (Number(pageNo) <= 0 || Number(pageNo).isNaN) {
+    console.log("invalid");
+    return false;
+  }
+
+  return true;
+}
+
+function displayInvalidMessages() {
+  console.log('displaying error messages')
 }
 
 // Library Storage ?
@@ -49,15 +81,18 @@ const library = [];
 // Book constructor
 
 function Book(title, author, pageNo, read) {
-  this.title = title;
-  this.author = author;
-  this.pageNo = pageNo;
-  this.read = read;
-}
+  const toggleRead = function () {
+    this.read = !this.read;
+  };
 
-Book.prototype.toggleRead = function () {
-  this.read = !this.read;
-};
+  return {
+    title,
+    author,
+    pageNo,
+    read,
+    toggleRead,
+  };
+}
 
 function addBookToLibrary(bookTitle, bookAuthor, pageNo, read) {
   const newBook = new Book(bookTitle, bookAuthor, pageNo, read);
@@ -66,6 +101,6 @@ function addBookToLibrary(bookTitle, bookAuthor, pageNo, read) {
   console.log(library);
 }
 
-function createBookEntryCard() {
+function createBookEntryCard() {}
 
-}
+function displayBookEntries() {}
