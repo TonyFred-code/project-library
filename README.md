@@ -37,4 +37,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
-Mention any other resources, libraries, or tutorials you used during the project.
+- Icons used in this project are from [Material Design Icons](https://pictogrammers.com/library/mdi/).
+- The project's user interface design was inspired by [michalosman's library project](https://github.com/michalosman/library). You can check out the true UI [here](https://michalosman.github.io/library/).
+ - [MDN Web Docs](https://devdocs.io)
