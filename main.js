@@ -90,21 +90,22 @@ function displayInvalidMessages(errMsg, errDisplayElm) {
 
 // Book constructor
 
-function Book(title, author, pageNo, read) {
-  this.title = title;
-  this.author = author;
-  this.pageNo = pageNo;
-  this.read = read;
-  this.displayed = false;
+class Book {
+  constructor(title, author, pageNo, read) {
+    this.title = title;
+    this.author = author;
+    this.pageNo = pageNo;
+    this.read = read;
+    this.displayed = false;
+  }
+  toggleRead() {
+    this.read = !this.read;
+  }
+  markDisplayed() {
+    this.displayed = true;
+  }
 }
 
-Book.prototype.toggleRead = function () {
-  this.read = !this.read;
-};
-
-Book.prototype.markDisplayed = function () {
-  this.displayed = true;
-}
 
 function addBookToLibrary(bookTitle, bookAuthor, pageNo, read) {
   const newBook = new Book(bookTitle, bookAuthor, pageNo, read);
