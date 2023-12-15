@@ -4,9 +4,6 @@ const confirmBtn = bookEntryDialog.querySelector('#confirmBtn');
 const closeDialogBtn = bookEntryDialog.querySelector('#closeBtn');
 const form = document.querySelector('form');
 const libraryDisplay = document.querySelector('.library-display');
-const titleErrContainer = document.querySelector('.book-title.error-msg');
-const authorErrContainer = document.querySelector('.book-author.error-msg');
-const pagesNoErrContainer = document.querySelector('.book-pages.error-msg');
 const addDummyBookEntriesBtn = document.querySelector(
   '.add-dummy-book-entries'
 );
@@ -101,21 +98,6 @@ form.addEventListener('submit', (event) => {
   notDisplayedLibrary = [];
   bookEntryDialog.close();
 });
-
-confirmBtn.addEventListener('click', (event) => {});
-
-function displayInvalidMessages(errMsg, errDisplayElm) {
-  if (typeof errMsg !== 'string' || errMsg.trim() === '') {
-    return;
-  }
-
-  if (errDisplayElm === null || !errDisplayElm) {
-    return;
-  }
-
-  errDisplayElm.textContent = errMsg;
-  errDisplayElm.classList.remove('hidden');
-}
 
 // Book constructor
 
