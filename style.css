@@ -243,11 +243,6 @@ form .btn-container {
   color: #e63328;
 }
 
-.error-msg {
-    color: red;
-    margin: 3px 0;
-}
-
 .hidden {
     display: none;
 }
