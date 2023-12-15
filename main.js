@@ -59,6 +59,18 @@ authorInput.addEventListener('input', () => {
   authorInput.reportValidity();
 });
 
+pageNoInput.addEventListener('input', () => {
+  let value = Number(pageNoInput.value);
+
+  if (!Number.isFinite(value) || value <= 0) {
+    pageNoInput.setCustomValidity('Please input a valid page number');
+  } else {
+    pageNoInput.setCustomValidity('');
+  }
+
+  pageNoInput.reportValidity();
+});
+
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
