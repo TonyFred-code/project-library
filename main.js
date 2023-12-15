@@ -200,11 +200,11 @@ function toggleBookEntryReadStatus(e) {
   );
 }
 
-function removeBookEntry() {
-  let parentIndex = this.getAttribute('data-index');
+function removeBookEntry(e) {
+  let parentIndex = e.currentTarget.getAttribute('data-index');
 
   displayedLibrary.splice(parentIndex, 1);
-  libraryDisplay.removeChild(this.parentElement);
+  libraryDisplay.removeChild(e.currentTarget.parentElement);
 }
 
 displayBooksInLibrary(notDisplayedLibrary);
