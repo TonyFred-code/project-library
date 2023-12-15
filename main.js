@@ -190,9 +190,9 @@ function displayBooksInLibrary(library) {
   }
 }
 
-function toggleBookEntryReadStatus() {
-  let element = this;
-  let parentEntryIndex = this.parentElement.getAttribute('data-index');
+function toggleBookEntryReadStatus(e) {
+  let element = e.currentTarget;
+  let parentEntryIndex = element.parentElement.getAttribute('data-index');
 
   displayedLibrary[parentEntryIndex].toggleRead();
   element.textContent = `${
