@@ -1,62 +1,91 @@
-const showButton = document.getElementById("showDialog");
-const bookEntryDialog = document.getElementById("book-entry-dialog");
-const confirmBtn = bookEntryDialog.querySelector("#confirmBtn");
-const closeDialogBtn = bookEntryDialog.querySelector("#closeBtn");
-const form = document.querySelector("form");
-const libraryDisplay = document.querySelector(".library-display");
-const titleErrContainer = document.querySelector(".book-title.error-msg");
-const authorErrContainer = document.querySelector(".book-author.error-msg");
-const pagesNoErrContainer = document.querySelector(".book-pages.error-msg");
-const addDummyBookEntriesBtn = document.querySelector(".add-dummy-book-entries");
+const showButton = document.getElementById('showDialog');
+const bookEntryDialog = document.getElementById('book-entry-dialog');
+const confirmBtn = bookEntryDialog.querySelector('#confirmBtn');
+const closeDialogBtn = bookEntryDialog.querySelector('#closeBtn');
+const form = document.querySelector('form');
+const libraryDisplay = document.querySelector('.library-display');
+const titleErrContainer = document.querySelector('.book-title.error-msg');
+const authorErrContainer = document.querySelector('.book-author.error-msg');
+const pagesNoErrContainer = document.querySelector('.book-pages.error-msg');
+const addDummyBookEntriesBtn = document.querySelector(
+  '.add-dummy-book-entries'
+);
 
 // Library Storage ?
 let displayedLibrary = [];
 let notDisplayedLibrary = [];
 
-addDummyBookEntriesBtn.addEventListener("click", displayDummyBooks);
+addDummyBookEntriesBtn.addEventListener('click', displayDummyBooks);
 
 // "Show the dialog" button opens the <dialog> modally
-showButton.addEventListener("click", () => {
+showButton.addEventListener('click', () => {
   bookEntryDialog.showModal();
 });
 
-closeDialogBtn.addEventListener("click", (e) => {
+closeDialogBtn.addEventListener('click', (e) => {
   e.preventDefault();
 
   bookEntryDialog.close();
 });
 
-bookEntryDialog.addEventListener("close", (e) => {
-  form.title.value = "";
-  form.pages.value = "";
-  form.author.value = "";
+bookEntryDialog.addEventListener('close', (e) => {
+  form.title.value = '';
+  form.pages.value = '';
+  form.author.value = '';
 });
 
-confirmBtn.addEventListener("click", (event) => {
+const bookTitleInput = form.elements['title'];
+const authorInput = form.elements['author'];
+const pageNoInput = form.elements['pages'];
+
+bookTitleInput.addEventListener('input', (e) => {
+  let value = bookTitleInput.value;
+
+  if (value.trim() === '') {
+    bookTitleInput.setCustomValidity('Please input a book title');
+  } else {
+    bookTitleInput.setCustomValidity('');
+  }
+
+  bookTitleInput.reportValidity();
+});
+
+authorInput.addEventListener('input', () => {
+  let value = authorInput.value;
+
+  if (value.trim() === '') {
+    authorInput.setCustomValidity('Please input a book author');
+  } else {
+    authorInput.setCustomValidity('');
+  }
+
+  authorInput.reportValidity();
+});
+
+form.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  titleErrContainer.classList.add("hidden");
-  authorErrContainer.classList.add("hidden");
-  pagesNoErrContainer.classList.add("hidden");
+  titleErrContainer.classList.add('hidden');
+  authorErrContainer.classList.add('hidden');
+  pagesNoErrContainer.classList.add('hidden');
 
-  if (form.title.value.trim() === "") {
-    let errMsg = " * Please input book's title * ";
-    displayInvalidMessages(errMsg, titleErrContainer);
-    form.title.focus();
+  if (form.title.value.trim() === '') {
+    form.title.setCustomValidity('Please input a book title');
+    form.title.reportValidity();
     return;
   }
 
-  if (form.author.value.trim() === "") {
-    let errMsg = ` * Please input the book's author * `;
-    displayInvalidMessages(errMsg, authorErrContainer);
-    form.author.focus();
+  if (form.author.value.trim() === '') {
+    authorInput.setCustomValidity('Please input a book author');
+    authorInput.reportValidity();
     return;
   }
 
   if (isNaN(Number(form.pages.value)) || Number(form.pages.value) <= 0) {
-    let errMsg = " * Please input a valid number greater than zero * ";
-    displayInvalidMessages(errMsg, pagesNoErrContainer);
-    form.pages.focus();
+    pageNoInput.setCustomValidity(
+      'Please input a valid number greater than zero '
+    );
+    pageNoInput.reportValidity();
     return;
   }
 
@@ -73,8 +102,10 @@ confirmBtn.addEventListener("click", (event) => {
   bookEntryDialog.close();
 });
 
+confirmBtn.addEventListener('click', (event) => {});
+
 function displayInvalidMessages(errMsg, errDisplayElm) {
-  if (typeof errMsg !== "string" || errMsg.trim() === "") {
+  if (typeof errMsg !== 'string' || errMsg.trim() === '') {
     return;
   }
 
@@ -83,10 +114,8 @@ function displayInvalidMessages(errMsg, errDisplayElm) {
   }
 
   errDisplayElm.textContent = errMsg;
-  errDisplayElm.classList.remove("hidden");
+  errDisplayElm.classList.remove('hidden');
 }
-
-
 
 // Book constructor
 
@@ -106,7 +135,6 @@ class Book {
   }
 }
 
-
 function addBookToLibrary(bookTitle, bookAuthor, pageNo, read) {
   const newBook = new Book(bookTitle, bookAuthor, pageNo, read);
 
@@ -115,7 +143,7 @@ function addBookToLibrary(bookTitle, bookAuthor, pageNo, read) {
 
 function displayBooksInLibrary(library) {
   if (library.length === 0) {
-    libraryDisplay.textContent = "";
+    libraryDisplay.textContent = '';
     return;
   }
 
@@ -127,60 +155,63 @@ function displayBooksInLibrary(library) {
       continue;
     }
 
-      const bookEntry = document.createElement("div");
-      bookEntry.setAttribute("class", "book-entry");
-      bookEntry.setAttribute("data-index", `${i}`);
+    const bookEntry = document.createElement('div');
+    bookEntry.setAttribute('class', 'book-entry');
+    bookEntry.setAttribute('data-index', `${i}`);
 
-      const bookTitle = document.createElement("h2");
-      bookTitle.setAttribute("class", "book-title");
-      bookTitle.textContent = `${library[i].title}`;
+    const bookTitle = document.createElement('h2');
+    bookTitle.setAttribute('class', 'book-title');
+    bookTitle.textContent = `${library[i].title}`;
 
-      const bookAuthor = document.createElement("p");
-      bookAuthor.setAttribute("class", "book-author");
-      bookAuthor.textContent = `${library[i].author}`;
+    const bookAuthor = document.createElement('p');
+    bookAuthor.setAttribute('class', 'book-author');
+    bookAuthor.textContent = `${library[i].author}`;
 
-      const bookPageNumber = document.createElement("p");
-      bookPageNumber.setAttribute("class", "book-page-numbers");
-      bookPageNumber.textContent = `${library[i].pageNo} ${
-        library[i].pageNo === 1 ? "page" : "pages"
-      }`;
+    const bookPageNumber = document.createElement('p');
+    bookPageNumber.setAttribute('class', 'book-page-numbers');
+    bookPageNumber.textContent = `${library[i].pageNo} ${
+      library[i].pageNo === 1 ? 'page' : 'pages'
+    }`;
 
-      const readBtn = document.createElement("button");
-      readBtn.setAttribute("class", "read");
-      readBtn.setAttribute("data-state", `${library[i].read}`);
-      readBtn.setAttribute("type", "button");
-      readBtn.textContent = `${library[i].read ? "READ" : "NOT READ"}`;
-      readBtn.addEventListener("click", toggleBookEntryReadStatus);
+    const readBtn = document.createElement('button');
+    readBtn.setAttribute('class', 'read');
+    readBtn.setAttribute('data-state', `${library[i].read}`);
+    readBtn.setAttribute('type', 'button');
+    readBtn.textContent = `${library[i].read ? 'READ' : 'NOT READ'}`;
+    readBtn.addEventListener('click', toggleBookEntryReadStatus);
 
-      const removeBtn = document.createElement("button");
-      removeBtn.classList.add("remove-book-entry");
-      removeBtn.setAttribute("data-index", `${i}`);
-      removeBtn.textContent = "REMOVE";
-      removeBtn.addEventListener("click", removeBookEntry);
+    const removeBtn = document.createElement('button');
+    removeBtn.classList.add('remove-book-entry');
+    removeBtn.setAttribute('data-index', `${i}`);
+    removeBtn.textContent = 'REMOVE';
+    removeBtn.addEventListener('click', removeBookEntry);
 
-      bookEntry.appendChild(bookTitle);
-      bookEntry.appendChild(bookAuthor);
-      bookEntry.appendChild(bookPageNumber);
-      bookEntry.appendChild(readBtn);
-      bookEntry.appendChild(removeBtn);
-      libraryDisplay.appendChild(bookEntry);
-      library[i].displayed = true;
+    bookEntry.appendChild(bookTitle);
+    bookEntry.appendChild(bookAuthor);
+    bookEntry.appendChild(bookPageNumber);
+    bookEntry.appendChild(readBtn);
+    bookEntry.appendChild(removeBtn);
+    libraryDisplay.appendChild(bookEntry);
+    library[i].displayed = true;
   }
 }
 
 function toggleBookEntryReadStatus() {
   let element = this;
-  let parentEntryIndex = this.parentElement.getAttribute("data-index");
+  let parentEntryIndex = this.parentElement.getAttribute('data-index');
 
   displayedLibrary[parentEntryIndex].toggleRead();
   element.textContent = `${
-    displayedLibrary[parentEntryIndex].read ? "READ" : "NOT READ"
+    displayedLibrary[parentEntryIndex].read ? 'READ' : 'NOT READ'
   }`;
-  element.setAttribute("data-state", `${displayedLibrary[parentEntryIndex].read}`);
+  element.setAttribute(
+    'data-state',
+    `${displayedLibrary[parentEntryIndex].read}`
+  );
 }
 
 function removeBookEntry() {
-  let parentIndex = this.getAttribute("data-index");
+  let parentIndex = this.getAttribute('data-index');
 
   displayedLibrary.splice(parentIndex, 1);
   libraryDisplay.removeChild(this.parentElement);
