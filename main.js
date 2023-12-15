@@ -74,10 +74,6 @@ pageNoInput.addEventListener('input', () => {
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  titleErrContainer.classList.add('hidden');
-  authorErrContainer.classList.add('hidden');
-  pagesNoErrContainer.classList.add('hidden');
-
   if (form.title.value.trim() === '') {
     form.title.setCustomValidity('Please input a book title');
     form.title.reportValidity();
